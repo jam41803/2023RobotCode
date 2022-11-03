@@ -34,6 +34,8 @@ public class DriveSubsystem extends SubsystemBase {
     motorControllers[Constants.frontLeftIndex]);
     motorControllers[Constants.backRightIndex].follow(
     motorControllers[Constants.frontRightIndex]);
+    //Inverting Motors
+    motorControllers[Constants.frontRightIndex].setInverted(true);
 
   differentialDrive = new DifferentialDrive(
     motorControllers[Constants.frontLeftIndex],
@@ -42,7 +44,7 @@ public class DriveSubsystem extends SubsystemBase {
 
   public void arcadeDrive() {
     differentialDrive.arcadeDrive(
-        driverJoystick.getRawAxis(Constants.leftJoystickY) * -1,
+        driverJoystick.getRawAxis(Constants.leftJoystickY),
         driverJoystick.getRawAxis(Constants.rightJoystickX));
   }
 
