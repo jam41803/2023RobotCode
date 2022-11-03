@@ -22,13 +22,13 @@ public class DriveSubsystem extends SubsystemBase {
 
     //Controllers
     motorControllers[Constants.frontLeftIndex] =
-  new MotorController("DriveBase Left Front", Constants.frontLeftWheel, Constants.driveLeftPID);
+  new MotorController("DriveBase Left Front", Constants.frontLeftWheel);
     motorControllers[Constants.backLeftIndex] =
-  new MotorController("DriveBase Left Rear", Constants.backLeftWheel, Constants.driveLeftPID);
+  new MotorController("DriveBase Left Rear", Constants.backLeftWheel);
     motorControllers[Constants.frontRightIndex] =
-  new MotorController("DriveBase Right Front", Constants.frontRightWheel, Constants.driveRightPID);
+  new MotorController("DriveBase Right Front", Constants.frontRightWheel);
     motorControllers[Constants.backRightIndex] =
-  new MotorController("DriveBase Right Rear", Constants.backRightWheel, Constants.driveRightPID);
+  new MotorController("DriveBase Right Rear", Constants.backRightWheel);
     //Making them mirror each other
     motorControllers[Constants.backLeftIndex].follow(
     motorControllers[Constants.frontLeftIndex]);
@@ -42,11 +42,15 @@ public class DriveSubsystem extends SubsystemBase {
 
   public void arcadeDrive() {
     differentialDrive.arcadeDrive(
-        driverJoystick.getRawAxis(Constants.leftJoystickY),
-        driverJoystick.getRawAxis(Constants.rightJoystickX),
-        true);
+        driverJoystick.getRawAxis(Constants.leftJoystickY) * -1,
+        driverJoystick.getRawAxis(Constants.rightJoystickX));
   }
 
+  public void stop() {
+    for (MotorController motorController : motorControllers) {
+      motorController.stopMotor();
+    }
+  }
 
   @Override
   public void periodic() {

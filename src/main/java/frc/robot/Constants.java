@@ -25,6 +25,5 @@ public final class Constants {
     // Driver Computer Ports
     public final static int portNumber0 = 0;
     public final static int portNumber1 = 1;
-    public final static boolean usingExternal = true;
 
 }

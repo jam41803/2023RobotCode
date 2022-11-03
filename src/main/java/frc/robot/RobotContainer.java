@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.FunctionalCommand;
 import frc.robot.subsystems.DriveSubsystem;
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -18,16 +19,15 @@ import frc.robot.subsystems.DriveSubsystem;
 public class RobotContainer {
 
   private static final Joystick driverJoystick = new Joystick(Constants.portNumber0);
+  private static final DriveSubsystem driveSubsystem = new DriveSubsystem(driverJoystick);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     configureButtonBindings();
-    initSubsystems();
+    driveSubsystem.setDefaultCommand(new FunctionalCommand(()->{}, driveSubsystem::arcadeDrive, (Boolean x) -> driveSubsystem.stop(), () -> false, driveSubsystem));
   }
 
-  private void initSubsystems() {
-    new DriveSubsystem(driverJoystick);
-  }
+
 
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
