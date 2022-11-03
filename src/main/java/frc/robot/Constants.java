@@ -19,11 +19,8 @@ public final class Constants {
     public final static int leftJoystickY = 1;
     public final static int rightJoystickX = 2;
     public final static int rightJoystickY = 3;
-    // PIDs pulled from previous robot code
-    public final static double[] driveRightPID = {0.00045, 0.00000085, 0};
-    public final static double[] driveLeftPID = {0.00045, 0.0000025, 0};
     // Driver Computer Ports
-    public final static int portNumber0 = 0;
-    public final static int portNumber1 = 1;
+    public final static int driverControllerPort = 0;
+    public final static int operatorControllerPort = 1;
 
 }

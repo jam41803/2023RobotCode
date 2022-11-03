@@ -18,7 +18,7 @@ import frc.robot.subsystems.DriveSubsystem;
  */
 public class RobotContainer {
 
-  private static final Joystick driverJoystick = new Joystick(Constants.portNumber0);
+  private static final Joystick driverJoystick = new Joystick(Constants.driverControllerPort);
   private static final DriveSubsystem driveSubsystem = new DriveSubsystem(driverJoystick);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
