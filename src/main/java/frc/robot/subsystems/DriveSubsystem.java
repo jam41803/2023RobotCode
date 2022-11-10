@@ -9,11 +9,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.Constants;
-import frc.robot.common.hardware.MotorController;
-
 
 public class DriveSubsystem extends SubsystemBase {
   private final Joystick driverJoystick;
@@ -22,7 +19,7 @@ public class DriveSubsystem extends SubsystemBase {
 
   public DriveSubsystem(Joystick joystick) {
     driverJoystick = joystick;
-    sparkMax = new MotorController[4];
+    sparkMax = new CANSparkMax[4];
 
     //Controllers
     sparkMax[Constants.frontLeftIndex] =
@@ -50,12 +47,6 @@ public class DriveSubsystem extends SubsystemBase {
     differentialDrive.arcadeDrive(
         driverJoystick.getRawAxis(Constants.leftJoystickY),
         driverJoystick.getRawAxis(Constants.rightJoystickX));
-  }
-
-  public void stop() {
-    for (CANSparkMax motorController : sparkMax) {
-      motorController.stopMotor();
-    }
   }
 
   @Override

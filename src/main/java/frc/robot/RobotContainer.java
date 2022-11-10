@@ -5,10 +5,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.FunctionalCommand;
+import frc.robot.commands.DriveCommand;
 import frc.robot.subsystems.DriveSubsystem;
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -18,14 +17,14 @@ import frc.robot.subsystems.DriveSubsystem;
  */
 public class RobotContainer {
 
-  private static final Joystick driverJoystick = new Joystick(Constants.driverControllerPort);
-  private static final DriveSubsystem driveSubsystem = new DriveSubsystem(driverJoystick);
-
+  private DriveCommand driveCommand;
+  private DriveSubsystem driveSubsystem;
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     configureButtonBindings();
-    driveSubsystem.setDefaultCommand(new FunctionalCommand(()->{}, driveSubsystem::arcadeDrive, (Boolean x) -> driveSubsystem.stop(), () -> false, driveSubsystem));
+    initSubsystem();
   }
+
 
 
 
@@ -35,6 +34,12 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
+
+   private void initSubsystem() {
+      driveCommand = new DriveCommand(driveSubsystem);
+      driveSubsystem.setDefaultCommand(driveCommand);
+   }
+
   private void configureButtonBindings() {}
 
   public Command getAutonomousCommand() {
