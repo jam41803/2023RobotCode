@@ -6,6 +6,10 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.Constants;
 import frc.robot.common.hardware.MotorController;
@@ -14,32 +18,32 @@ import frc.robot.common.hardware.MotorController;
 public class DriveSubsystem extends SubsystemBase {
   private final Joystick driverJoystick;
   private final DifferentialDrive differentialDrive;
-  private final MotorController[] motorControllers;
+  private final CANSparkMax[] sparkMax;
 
   public DriveSubsystem(Joystick joystick) {
     driverJoystick = joystick;
-    motorControllers = new MotorController[4];
+    sparkMax = new MotorController[4];
 
     //Controllers
-    motorControllers[Constants.frontLeftIndex] =
-  new MotorController("DriveBase Left Front", Constants.frontLeftWheel);
-    motorControllers[Constants.backLeftIndex] =
-  new MotorController("DriveBase Left Rear", Constants.backLeftWheel);
-    motorControllers[Constants.frontRightIndex] =
-  new MotorController("DriveBase Right Front", Constants.frontRightWheel);
-    motorControllers[Constants.backRightIndex] =
-  new MotorController("DriveBase Right Rear", Constants.backRightWheel);
+    sparkMax[Constants.frontLeftIndex] =
+  new CANSparkMax(Constants.frontLeftWheel, MotorType.kBrushless);
+    sparkMax[Constants.backLeftIndex] =
+  new CANSparkMax(Constants.backLeftWheel, MotorType.kBrushless);
+    sparkMax[Constants.frontRightIndex] =
+  new CANSparkMax(Constants.frontRightWheel, MotorType.kBrushless);
+    sparkMax[Constants.backRightIndex] =
+  new CANSparkMax(Constants.backRightWheel, MotorType.kBrushless);
     //Making them mirror each other
-    motorControllers[Constants.backLeftIndex].follow(
-    motorControllers[Constants.frontLeftIndex]);
-    motorControllers[Constants.backRightIndex].follow(
-    motorControllers[Constants.frontRightIndex]);
+    sparkMax[Constants.backLeftIndex].follow(
+    sparkMax[Constants.frontLeftIndex]);
+    sparkMax[Constants.backRightIndex].follow(
+    sparkMax[Constants.frontRightIndex]);
     //Inverting Motors
-    motorControllers[Constants.frontRightIndex].setInverted(true);
+    sparkMax[Constants.frontRightIndex].setInverted(true);
 
   differentialDrive = new DifferentialDrive(
-    motorControllers[Constants.frontLeftIndex],
-    motorControllers[Constants.frontRightIndex]);
+    sparkMax[Constants.frontLeftIndex],
+    sparkMax[Constants.frontRightIndex]);
   }
 
   public void arcadeDrive() {
@@ -49,7 +53,7 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public void stop() {
-    for (MotorController motorController : motorControllers) {
+    for (CANSparkMax motorController : sparkMax) {
       motorController.stopMotor();
     }
   }
