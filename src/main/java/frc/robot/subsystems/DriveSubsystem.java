@@ -23,13 +23,13 @@ public class DriveSubsystem extends SubsystemBase {
 
     //Controllers
     sparkMax[Constants.frontLeftIndex] =
-  new CANSparkMax(Constants.frontLeftWheel, MotorType.kBrushless);
+  new CANSparkMax(Constants.frontLeftMotor, MotorType.kBrushless);
     sparkMax[Constants.backLeftIndex] =
-  new CANSparkMax(Constants.backLeftWheel, MotorType.kBrushless);
+  new CANSparkMax(Constants.backLeftMotor, MotorType.kBrushless);
     sparkMax[Constants.frontRightIndex] =
-  new CANSparkMax(Constants.frontRightWheel, MotorType.kBrushless);
+  new CANSparkMax(Constants.frontRightMotor, MotorType.kBrushless);
     sparkMax[Constants.backRightIndex] =
-  new CANSparkMax(Constants.backRightWheel, MotorType.kBrushless);
+  new CANSparkMax(Constants.backRightMotor, MotorType.kBrushless);
     //Making them mirror each other
     sparkMax[Constants.backLeftIndex].follow(
     sparkMax[Constants.frontLeftIndex]);
