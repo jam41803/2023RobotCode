@@ -18,8 +18,6 @@ public class DriveSubsystem extends SubsystemBase {
   private final Joystick driverJoystick;
   private final DifferentialDrive differentialDrive;
   private final CANSparkMax[] motors;
-  private double[] velocity;
-
 
   public DriveSubsystem(Joystick joystick) {
     driverJoystick = joystick;
@@ -64,19 +62,13 @@ public class DriveSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    int i = 0;
-    for(CANSparkMax canSparkMax : motors) {
-       velocity[i++] = canSparkMax.getEncoder().getVelocity();
-    }
+    SmartDashboard.putNumber("Left Motor", motors[Constants.frontLeftIndex].getEncoder().getVelocity());
+    SmartDashboard.putNumber("Right Motor", motors[Constants.frontRightIndex].getEncoder().getVelocity());
   }
 
-  public void initSmartBoard() {
-    SmartDashboard.putNumberArray("Motor RPM", velocity);
-  }
 
   @Override
   public void simulationPeriodic() {
-    // This method will be called once per scheduler run during simulation
   }
 
 }
