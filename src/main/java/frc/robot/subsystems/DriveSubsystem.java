@@ -15,37 +15,45 @@ import frc.robot.Constants;
 public class DriveSubsystem extends SubsystemBase {
   private final Joystick driverJoystick;
   private final DifferentialDrive differentialDrive;
-  private final CANSparkMax[] sparkMax;
+  private final CANSparkMax[] motors;
 
   public DriveSubsystem(Joystick joystick) {
     driverJoystick = joystick;
-    sparkMax = new CANSparkMax[4];
+    motors = new CANSparkMax[4];
 
     //Controllers
-    sparkMax[Constants.frontLeftIndex] =
+    motors[Constants.frontLeftIndex] =
   new CANSparkMax(Constants.frontLeftMotor, MotorType.kBrushless);
-    sparkMax[Constants.backLeftIndex] =
+    motors[Constants.backLeftIndex] =
   new CANSparkMax(Constants.backLeftMotor, MotorType.kBrushless);
-    sparkMax[Constants.frontRightIndex] =
+    motors[Constants.frontRightIndex] =
   new CANSparkMax(Constants.frontRightMotor, MotorType.kBrushless);
-    sparkMax[Constants.backRightIndex] =
+    motors[Constants.backRightIndex] =
   new CANSparkMax(Constants.backRightMotor, MotorType.kBrushless);
     //Making them mirror each other
-    sparkMax[Constants.backLeftIndex].follow(
-    sparkMax[Constants.frontLeftIndex]);
-    sparkMax[Constants.backRightIndex].follow(
-    sparkMax[Constants.frontRightIndex]);
+    motors[Constants.backLeftIndex].follow(
+    motors[Constants.frontLeftIndex]);
+    motors[Constants.backRightIndex].follow(
+    motors[Constants.frontRightIndex]);
+
+    //set limits on motors
+    for (CANSparkMax canSparkMax : motors) {
+      canSparkMax.setOpenLoopRampRate(Constants.openLoopRampRate);
+      canSparkMax.setSmartCurrentLimit(Constants.smartCurrentLimit);
+    }
     //Inverting Motors
-    sparkMax[Constants.frontRightIndex].setInverted(true);
+    motors[Constants.frontRightIndex].setInverted(true);
+
+
 
   differentialDrive = new DifferentialDrive(
-    sparkMax[Constants.frontLeftIndex],
-    sparkMax[Constants.frontRightIndex]);
+    motors[Constants.frontLeftIndex],
+    motors[Constants.frontRightIndex]);
   }
 
   public void arcadeDrive() {
     differentialDrive.arcadeDrive(
-        driverJoystick.getRawAxis(Constants.leftJoystickY),
+        driverJoystick.getRawAxis(Constants.leftJoystickY) * -1,
         driverJoystick.getRawAxis(Constants.rightJoystickX));
   }
 

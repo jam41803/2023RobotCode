@@ -5,10 +5,12 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.DriveCommand;
 import frc.robot.subsystems.DriveSubsystem;
+
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -19,6 +21,7 @@ public class RobotContainer {
 
   private DriveCommand driveCommand;
   private DriveSubsystem driveSubsystem;
+  private Joystick joystick = new Joystick(Constants.driverControllerPort);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     configureButtonBindings();
@@ -36,8 +39,10 @@ public class RobotContainer {
    */
 
    private void initSubsystem() {
+      driveSubsystem = new DriveSubsystem(joystick);
       driveCommand = new DriveCommand(driveSubsystem);
       driveSubsystem.setDefaultCommand(driveCommand);
+
    }
 
   private void configureButtonBindings() {}

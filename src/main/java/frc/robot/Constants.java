@@ -3,7 +3,8 @@ package frc.robot;
 
 public final class Constants {
     
-
+    public final static int smartCurrentLimit = 40;
+    public final static double openLoopRampRate = 0.2;
     // IDs for Motors on robot
     public final static int frontLeftMotor = 3;
     public final static int backLeftMotor = 4;
