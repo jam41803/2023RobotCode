@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.revrobotics.CANSparkMax;
@@ -35,7 +36,6 @@ public class DriveSubsystem extends SubsystemBase {
     motors[Constants.frontLeftIndex]);
     motors[Constants.backRightIndex].follow(
     motors[Constants.frontRightIndex]);
-
     //set limits on motors
     for (CANSparkMax canSparkMax : motors) {
       canSparkMax.setOpenLoopRampRate(Constants.openLoopRampRate);
@@ -59,7 +59,12 @@ public class DriveSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    double[] rpm = new double[4];
+    int i = 0;
+    for(CANSparkMax canSparkMax : motors) {
+       rpm[i++] = canSparkMax.getEncoder().getVelocity();
+    }
+    SmartDashboard.putNumberArray("Motor RPM", rpm);
   }
 
   @Override
