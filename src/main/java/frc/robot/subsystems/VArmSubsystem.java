@@ -36,11 +36,11 @@ public class VArmSubsystem extends SubsystemBase {
   }
 
   public void toggleArm() {
-    toggleArm ^= true; //Toggle boolean
+    toggleArm = !toggleArm; //Toggle boolean
     if (toggleArm) {
-      armPIDController.setReference(0, ControlType.kPosition);
+      armPIDController.setReference(0, ControlType.kPosition, 0);
     } else {
-      armPIDController.setReference(0, ControlType.kPosition);
+      armPIDController.setReference(0, ControlType.kPosition, 0);
     }
     
   }
