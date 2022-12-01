@@ -4,14 +4,33 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+//TODO: Make controller toggle from position 0 to 180
 
 public class VArmSubsystem extends SubsystemBase {
+  private final CANSparkMax armMotor;
+  private final RelativeEncoder armEncoder;
+  private final SparkMaxPIDController armPIDController;
   /** Creates a new VArmSubsystem. */
-  public VArmSubsystem() {}
+  public VArmSubsystem() {
+    armMotor = new CANSparkMax(Constants.verticalArmMotor, MotorType.kBrushless);
+    armEncoder = armMotor.getEncoder();
+    armPIDController = armMotor.getPIDController();
+  }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+  }
+
+  public void toggleArm() {
+    
   }
 }

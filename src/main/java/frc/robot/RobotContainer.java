@@ -8,8 +8,12 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DriveCommand;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.VArmSubsystem;
+import frc.robot.Constants;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -21,7 +25,9 @@ public class RobotContainer {
 
   private DriveCommand driveCommand;
   private DriveSubsystem driveSubsystem;
+  private VArmSubsystem vArmSubsystem;
   private Joystick joystick = new Joystick(Constants.driverControllerPort);
+  private JoystickButton breakFingerButton = new JoystickButton(joystick, Constants.aButtonID);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     configureButtonBindings();
@@ -45,7 +51,9 @@ public class RobotContainer {
 
    }
 
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+    breakFingerButton.whenPressed(new InstantCommand(vArmSubsystem::toggleArm, vArmSubsystem));
+  }
 
   public Command getAutonomousCommand() {
     return null;
