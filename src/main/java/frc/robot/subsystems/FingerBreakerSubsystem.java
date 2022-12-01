@@ -25,9 +25,9 @@ public class FingerBreakerSubsystem extends SubsystemBase {
     armPIDController = armMotor.getPIDController();
     toggleArm = false;
     armEncoder.setPosition(0); //Sets Position of Encoder
-    armPIDController.setP(0, 0);
-    armPIDController.setI(0, 0);
-    armPIDController.setD(0, 0);
+    armPIDController.setP(0);
+    armPIDController.setI(0);
+    armPIDController.setD(0);
   }
 
   @Override
@@ -38,9 +38,9 @@ public class FingerBreakerSubsystem extends SubsystemBase {
   public void toggleArm() {
     toggleArm = !toggleArm; //Toggle boolean
     if (toggleArm) {
-      armPIDController.setReference(0, ControlType.kPosition, 0);
+      armPIDController.setReference(0, ControlType.kPosition);
     } else {
-      armPIDController.setReference(0, ControlType.kPosition, 0);
+      armPIDController.setReference(0, ControlType.kPosition);
     }
     
   }
