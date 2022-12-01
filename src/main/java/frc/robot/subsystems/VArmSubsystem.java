@@ -17,17 +17,17 @@ public class VArmSubsystem extends SubsystemBase {
   private final CANSparkMax armMotor;
   private final RelativeEncoder armEncoder;
   private final SparkMaxPIDController armPIDController;
+  private boolean toggleArm;
   /** Creates a new VArmSubsystem. */
   public VArmSubsystem() {
     armMotor = new CANSparkMax(Constants.verticalArmMotor, MotorType.kBrushless);
     armEncoder = armMotor.getEncoder();
     armPIDController = armMotor.getPIDController();
-
-    armEncoder.setPosition(0);
+    toggleArm = false;
+    armEncoder.setPosition(0); //Sets Position of Encoder
     armPIDController.setP(0, 0);
     armPIDController.setI(0, 0);
     armPIDController.setD(0, 0);
-    armPIDController.setReference(0, ControlType.kPosition);
   }
 
   @Override
@@ -36,6 +36,12 @@ public class VArmSubsystem extends SubsystemBase {
   }
 
   public void toggleArm() {
+    toggleArm ^= true; //Toggle boolean
+    if (toggleArm) {
+      armPIDController.setReference(0, ControlType.kPosition);
+    } else {
+      armPIDController.setReference(0, ControlType.kPosition);
+    }
     
   }
 }
