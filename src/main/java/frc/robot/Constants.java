@@ -27,5 +27,6 @@ public final class Constants {
     public final static int operatorControllerPort = 1;
     // Vertical Arm Motor ID
     public final static int verticalArmMotor = 69;
-
+    public final static double[] fingerBreakerPid = {0, 0, 0};
+    public final static int fingerBreakerPidSlot = 1;
 }
