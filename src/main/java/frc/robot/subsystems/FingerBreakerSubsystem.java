@@ -13,14 +13,14 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 //TODO: Make controller toggle from position 0 to 180
 
-public class VArmSubsystem extends SubsystemBase {
+public class FingerBreakerSubsystem extends SubsystemBase {
   private final CANSparkMax armMotor;
   private final RelativeEncoder armEncoder;
   private final SparkMaxPIDController armPIDController;
   private boolean toggleArm;
   /** Creates a new VArmSubsystem. */
-  public VArmSubsystem() {
-    armMotor = new CANSparkMax(Constants.verticalArmMotor, MotorType.kBrushless);
+  public FingerBreakerSubsystem() {
+    armMotor = new CANSparkMax(Constants.fingerBreakerMotor, MotorType.kBrushless);
     armEncoder = armMotor.getEncoder();
     armPIDController = armMotor.getPIDController();
     toggleArm = false;

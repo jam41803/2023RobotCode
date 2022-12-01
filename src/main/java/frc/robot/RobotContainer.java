@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DriveCommand;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.VArmSubsystem;
+import frc.robot.subsystems.FingerBreakerSubsystem;
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -23,7 +23,7 @@ public class RobotContainer {
 
   private DriveCommand driveCommand;
   private DriveSubsystem driveSubsystem;
-  private VArmSubsystem vArmSubsystem;
+  private FingerBreakerSubsystem vArmSubsystem;
   private Joystick joystick = new Joystick(Constants.driverControllerPort);
   private JoystickButton breakFingerButton = new JoystickButton(joystick, Constants.aButtonID);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
