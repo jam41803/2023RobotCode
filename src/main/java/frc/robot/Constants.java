@@ -20,8 +20,12 @@ public final class Constants {
     public final static int leftJoystickY = 1;
     public final static int rightJoystickX = 4;
     public final static int rightJoystickY = 5;
+    // Operator Button
+    public final static int verticalArmButton = 69;
     // Driver Computer Ports
     public final static int driverControllerPort = 0;
     public final static int operatorControllerPort = 1;
+    // Vertical Arm Motor ID
+    public final static int verticalArmMotor = 69;
 
 }
