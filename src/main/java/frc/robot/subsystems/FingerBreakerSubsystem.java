@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import com.revrobotics.CANSparkMax;
@@ -28,19 +29,33 @@ public class FingerBreakerSubsystem extends SubsystemBase {
     armPIDController.setP(0);
     armPIDController.setI(0);
     armPIDController.setD(0);
+    SmartDashboard.putNumber("PID P", armPIDController.getP());
+    SmartDashboard.putNumber("PID I", armPIDController.getI());
+    SmartDashboard.putNumber("PID D", armPIDController.getD());
+    SmartDashboard.putBoolean("PID Button", false);
+    armMotor.setSmartCurrentLimit(40);
+    armMotor.setOpenLoopRampRate(0.2);
+    armMotor.enableVoltageCompensation(11);
+    ;
   }
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    if (SmartDashboard.getBoolean("PID Button", false)) {
+      armPIDController.setP(SmartDashboard.getNumber("PID P", armPIDController.getP()));
+      armPIDController.setI(SmartDashboard.getNumber("PID I", armPIDController.getI()));
+      armPIDController.setD(SmartDashboard.getNumber("PID D", armPIDController.getD()));
+    }
+    SmartDashboard.putBoolean("toggleArm", toggleArm);
+    SmartDashboard.putNumber("FB Encoder Pos", armEncoder.getPosition());
   }
 
   public void toggleArm() {
     toggleArm = !toggleArm; //Toggle boolean
     if (toggleArm) {
-      armPIDController.setReference(0, ControlType.kPosition);
+      armPIDController.setReference(Constants.fingerBreakerReferenceA, ControlType.kPosition);
     } else {
-      armPIDController.setReference(0, ControlType.kPosition);
+      armPIDController.setReference(Constants.fingerBreakerReferenceB, ControlType.kPosition);
     }
     
   }

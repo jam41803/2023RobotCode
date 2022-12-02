@@ -23,13 +23,13 @@ public class RobotContainer {
 
   private DriveCommand driveCommand;
   private DriveSubsystem driveSubsystem;
-  private FingerBreakerSubsystem vArmSubsystem;
+  private FingerBreakerSubsystem fingerBreakerSubsystem;
   private Joystick joystick = new Joystick(Constants.driverControllerPort);
   private JoystickButton breakFingerButton = new JoystickButton(joystick, Constants.aButtonID);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    configureButtonBindings();
     initSubsystem();
+    configureButtonBindings();
   }
 
 
@@ -41,16 +41,15 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-
    private void initSubsystem() {
       driveSubsystem = new DriveSubsystem(joystick);
       driveCommand = new DriveCommand(driveSubsystem);
       driveSubsystem.setDefaultCommand(driveCommand);
-
+      fingerBreakerSubsystem = new FingerBreakerSubsystem();
    }
 
   private void configureButtonBindings() {
-    breakFingerButton.whenPressed(new InstantCommand(vArmSubsystem::toggleArm, vArmSubsystem));
+    breakFingerButton.whenPressed(new InstantCommand(fingerBreakerSubsystem::toggleArm, fingerBreakerSubsystem));
   }
 
   public Command getAutonomousCommand() {

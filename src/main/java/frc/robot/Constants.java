@@ -25,8 +25,11 @@ public final class Constants {
     // Driver Computer Ports
     public final static int driverControllerPort = 0;
     public final static int operatorControllerPort = 1;
-    // Vertical Arm Motor ID
+    // Finger Breaker Motor ID
     public final static int fingerBreakerMotor = 69;
     public final static double[] fingerBreakerPid = {0, 0, 0};
     public final static int fingerBreakerPidSlot = 1;
+    // Finger Breaker Reference Points
+    public final static int fingerBreakerReferenceA = 0;
+    public final static int fingerBreakerReferenceB = 50;
 }
