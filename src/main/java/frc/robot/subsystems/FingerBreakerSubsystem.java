@@ -36,7 +36,6 @@ public class FingerBreakerSubsystem extends SubsystemBase {
     armMotor.setSmartCurrentLimit(40);
     armMotor.setOpenLoopRampRate(0.2);
     armMotor.enableVoltageCompensation(11);
-    ;
   }
 
   @Override
