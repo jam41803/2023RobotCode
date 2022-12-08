@@ -12,8 +12,6 @@ import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-//TODO: Make controller toggle from position 0 to 180
-
 public class FingerBreakerSubsystem extends SubsystemBase {
   private final CANSparkMax armMotor;
   private final RelativeEncoder armEncoder;
