@@ -28,10 +28,10 @@ public class FingerBreakerSubsystem extends SubsystemBase {
     armEncoder.setPosition(0); //Sets Position of Encoder
     armPIDController.setP(0);
     armPIDController.setI(0);
-    armPIDController.setD(0);
+    armPIDController.setFF(0);
     SmartDashboard.putNumber("PID P", armPIDController.getP());
     SmartDashboard.putNumber("PID I", armPIDController.getI());
-    SmartDashboard.putNumber("PID D", armPIDController.getD());
+    SmartDashboard.putNumber("PID FF", armPIDController.getFF());
     SmartDashboard.putBoolean("PID Button", false);
     armMotor.setSmartCurrentLimit(40);
     armMotor.setOpenLoopRampRate(0.2);
@@ -43,18 +43,18 @@ public class FingerBreakerSubsystem extends SubsystemBase {
     if (SmartDashboard.getBoolean("PID Button", false)) {
       armPIDController.setP(SmartDashboard.getNumber("PID P", armPIDController.getP()));
       armPIDController.setI(SmartDashboard.getNumber("PID I", armPIDController.getI()));
-      armPIDController.setD(SmartDashboard.getNumber("PID D", armPIDController.getD()));
+      armPIDController.setFF(SmartDashboard.getNumber("PID FF", armPIDController.getD()));
     }
     SmartDashboard.putBoolean("toggleArm", toggleArm);
-    SmartDashboard.putNumber("FB Encoder Pos", armEncoder.getPosition());
+    SmartDashboard.putNumber("FB Velocity", armEncoder.getVelocity());
   }
 
   public void toggleArm() {
     toggleArm = !toggleArm; //Toggle boolean
     if (toggleArm) {
-      armPIDController.setReference(Constants.fingerBreakerReferenceA, ControlType.kPosition);
+      armPIDController.setReference(Constants.fingerBreakerReferenceA, ControlType.kVelocity);
     } else {
-      armPIDController.setReference(Constants.fingerBreakerReferenceB, ControlType.kPosition);
+      armPIDController.setReference(Constants.fingerBreakerReferenceB, ControlType.kVelocity);
     }
     
   }

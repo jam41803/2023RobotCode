@@ -31,5 +31,5 @@ public final class Constants {
     public final static int fingerBreakerPidSlot = 1;
     // Finger Breaker Reference Points
     public final static int fingerBreakerReferenceA = 0;
-    public final static int fingerBreakerReferenceB = 60;
+    public final static int fingerBreakerReferenceB = 500;
 }
