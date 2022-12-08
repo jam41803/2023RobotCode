@@ -21,15 +21,15 @@ public final class Constants {
     public final static int rightJoystickX = 4;
     public final static int rightJoystickY = 5;
     // Operator Button
-    public final static int aButtonID = 0;
+    public final static int aButtonID = 1;
     // Driver Computer Ports
     public final static int driverControllerPort = 0;
     public final static int operatorControllerPort = 1;
     // Finger Breaker Motor ID
-    public final static int fingerBreakerMotor = 69;
-    public final static double[] fingerBreakerPid = {0, 0, 0};
+    public final static int fingerBreakerMotor = 5;
+    public final static double[] fingerBreakerPid = {1, 0, 0};
     public final static int fingerBreakerPidSlot = 1;
     // Finger Breaker Reference Points
     public final static int fingerBreakerReferenceA = 0;
-    public final static int fingerBreakerReferenceB = 50;
+    public final static int fingerBreakerReferenceB = 60;
 }
